@@ -1,0 +1,22 @@
+/* Estilos para o layout como antes */
+
+/* Estilos para o formulário de cadastro de frutas */
+#cadastro-frutas {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  #cadastro-frutas form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #cadastro-frutas label,
+  #cadastro-frutas input {
+    margin-bottom: 5px;
+  }
+  #cadastro-frutas button {
+    margin-top: 10px;
+  }
+  
