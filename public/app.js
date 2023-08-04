@@ -44,6 +44,20 @@ cadastroForm.addEventListener('submit', async (event) => {
   cadastrarFruta(nome, preco);
 });
   
+  // ...
+
+function toggleForm() {
+  const form = document.getElementById('cadastro-frutas');
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+  } else {
+    form.style.display = 'none';
+  }
+}
+
+// ...
+
+ 
 // Função para cadastrar uma nova fruta
 async function cadastrarFruta() {
   const nome = document.getElementById('nome').value;

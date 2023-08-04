@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +9,29 @@
 <body>
   <header>
     <h1>Minha Empresa de Frutas</h1>
+    <nav>
+      <ul>
+        <li><a href="#historico">Histórico de Vendas</a></li>
+        <li><a href="#dashboard">Dashboard do Cliente</a></li>
+        <!-- Adicione o identificador "btn-cadastrar" para o link "Cadastrar Frutas" -->
+        <li><a href="#cadastro-frutas" id="btn-cadastrar">Cadastrar Frutas</a></li>
+      </ul>
+    </nav>
   </header>
   
   <main>
     <section id="historico">
       <h2>Histórico de Vendas</h2>
-      <div id="historico-container"></div>
+      <div id="historico-container">
+        <!-- Aqui serão exibidas as vendas registradas -->
+      </div>
     </section>
     
     <aside id="dashboard">
       <h2>Dashboard do Cliente</h2>
-      <p id="saldo-cliente"></p>
+      <p id="saldo-cliente">
+        <!-- Aqui será exibido o saldo do cliente -->
+      </p>
     </aside>
 
     <!-- Formulário para cadastrar frutas -->

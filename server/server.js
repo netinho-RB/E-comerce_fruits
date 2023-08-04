@@ -5,6 +5,21 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 
 const port = 3000;
+
+async function connectToDB() {
+  try {
+    const uri = 'mongodb://localhost:27017'; // URL de conexão do MongoDB
+    const dbName = 'meu_banco_de_dados'; // Nome do banco de dados
+    const client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    return db;
+  } catch (error) {
+    console.error('Erro ao conectar ao banco de dados:', error);
+    throw error;
+  }
+}
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
@@ -34,18 +49,38 @@ app.get('/api/cliente', (req, res) => {
   }
 });
 
-// Rota para cadastrar uma nova fruta
-// Rota para cadastrar uma nova fruta
-app.post('/api/frutas', (req, res) => {
+  // ...
+
+const { MongoClient } = require('mongodb');
+
+// ...
+
+async function connectToDB() {
+  try {
+    const uri = 'mongodb://localhost:27017'; // URL de conexão do MongoDB
+    const dbName = 'meu_banco_de_dados'; // Nome do banco de dados
+    const client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    return db;
+  } catch (error) {
+    console.error('Erro ao conectar ao banco de dados:', error);
+    throw error;
+  }
+}
+
+// ...
+
+app.post('/api/frutas', async (req, res) => {
   try {
     const novaFruta = {
       nome: req.body.nome,
       preco: parseFloat(req.body.preco)
     };
 
-    const frutas = JSON.parse(fs.readFileSync('../database/frutas.json', 'utf8'));
-    frutas.push(novaFruta);
-    fs.writeFileSync('../database/frutas.json', JSON.stringify(frutas));
+    const db = await connectToDB(); // Estabelece conexão com o banco de dados
+    const frutasCollection = db.collection('frutas'); // Acessa a coleção de frutas
+    await frutasCollection.insertOne(novaFruta); // Insere a nova fruta no banco
 
     res.status(201).json({ message: 'Fruta cadastrada com sucesso!' });
   } catch (error) {
@@ -54,5 +89,24 @@ app.post('/api/frutas', (req, res) => {
   }
 });
 
+// ...
 
-// Resto do código para iniciar o servidor (já existente)
+
+// Rota para cadastrar uma nova fruta
+app.post('/api/frutas', async (req, res) => {
+  try {
+    const novaFruta = {
+      nome: req.body.nome,
+      preco: parseFloat(req.body.preco)
+    };
+
+    const db = await connectToDB(); // Estabelece conexão com o banco de dados
+    const frutasCollection = db.collection('frutas'); // Acessa a coleção de frutas
+    await frutasCollection.insertOne(novaFruta); // Insere a nova fruta no banco
+
+    res.status(201).json({ message: 'Fruta cadastrada com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao cadastrar fruta:', error);
+    res.status(500).json({ error: 'Erro ao cadastrar fruta' });
+  }
+});
