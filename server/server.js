@@ -4,6 +4,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -30,6 +35,7 @@ app.get('/api/cliente', (req, res) => {
 });
 
 // Rota para cadastrar uma nova fruta
+// Rota para cadastrar uma nova fruta
 app.post('/api/frutas', (req, res) => {
   try {
     const novaFruta = {
@@ -47,5 +53,6 @@ app.post('/api/frutas', (req, res) => {
     res.status(500).json({ error: 'Erro ao cadastrar fruta' });
   }
 });
+
 
 // Resto do código para iniciar o servidor (já existente)

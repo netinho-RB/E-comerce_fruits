@@ -1,3 +1,8 @@
+ 
+import { carregarHistorico, carregarSaldoCliente } from './modules/historico';
+import { cadastrarFruta } from './modules/frutas';
+
+
 const historicoContainer = document.getElementById('historico-container');
 const saldoClienteElement = document.getElementById('saldo-cliente');
 const cadastroForm = document.getElementById('cadastro-frutas').querySelector('form');
@@ -31,6 +36,14 @@ async function carregarSaldoCliente() {
   }
 }
 
+const cadastroForm = document.getElementById('cadastro-frutas').querySelector('form');
+cadastroForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const nome = document.getElementById('nome').value;
+  const preco = parseFloat(document.getElementById('preco').value);
+  cadastrarFruta(nome, preco);
+});
+  
 // Função para cadastrar uma nova fruta
 async function cadastrarFruta() {
   const nome = document.getElementById('nome').value;
